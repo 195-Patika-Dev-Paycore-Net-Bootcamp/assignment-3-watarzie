@@ -26,7 +26,7 @@ namespace PayCore_HW3.Controllers
             List<Container> result = session.Entities.ToList();
             return result;
         }
-        [HttpGet("{id}")]
+        [HttpGet("{vehicleid}")]
         public IActionResult GetByVehicleId(int id)
         {
             List<Container> container = session.Entities.Where(x => x.VehicleId == id).ToList();
@@ -36,7 +36,7 @@ namespace PayCore_HW3.Controllers
             }
             return Ok(container);
         }
-        [HttpGet("{id},{n}")]
+        [HttpGet("{vehicleid},{n}")]
         public IActionResult GetByNContainer(int id,int n)
         {
             List<List<Container>> result = new List<List<Container>>();
@@ -52,11 +52,6 @@ namespace PayCore_HW3.Controllers
                 
             }
             return Ok(result);
-            
-           
-            
-            
-
 
         }
         [HttpPost]
@@ -90,7 +85,6 @@ namespace PayCore_HW3.Controllers
             try
             {
                 session.BeginTranstaction();
-                container.Id = request.Id;
                 container.ContainerName = request.ContainerName;
                 container.Latitude = request.Latitude;
                 container.Longitude = request.Longitude;
