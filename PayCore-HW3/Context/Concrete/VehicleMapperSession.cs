@@ -52,7 +52,6 @@ namespace PayCore_HW3.Context
         {
             session.Save(entity);
         }
-
         public void Update(Vehicle entity)
         {
             session.Update(entity);

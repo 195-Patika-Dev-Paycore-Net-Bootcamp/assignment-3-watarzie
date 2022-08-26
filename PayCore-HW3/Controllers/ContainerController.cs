@@ -16,17 +16,19 @@ namespace PayCore_HW3.Controllers
     public class ContainerController : ControllerBase
     {
         private readonly IMapperSession<Container> session;
+       
         public ContainerController(IMapperSession<Container> session)
         {
             this.session = session;
+            
         }
         [HttpGet]
-        public List<Container> Get()
+        public List<Container> Get() // Container listesini döner
         {
             List<Container> result = session.Entities.ToList();
             return result;
         }
-        [HttpGet("{vehicleid}")]
+        [HttpGet("{vehicleid}")] // container listesini vehicleid'ye göre döner
         public IActionResult GetByVehicleId(int vehicleid)
         {
             List<Container> container = session.Entities.Where(x => x.VehicleId == vehicleid).ToList();
@@ -36,16 +38,16 @@ namespace PayCore_HW3.Controllers
             }
             return Ok(container);
         }
-        [HttpGet("{vehicleid},{n}")]
+        [HttpGet("{vehicleid},{n}")] // vehicleid listesini n girdisi kadar parçalayıp kümeleyip response eden action metot
         public IActionResult GetByNContainer(int vehicleid,int n)
         {
-            List<List<Container>> result = new List<List<Container>>();
+            List<List<Container>> result = new List<List<Container>>(); // kümelenmiş halinin dönmesi için oluşturulan liste
             List<Container> container = session.Entities.Where(x => x.VehicleId == vehicleid).ToList();
-            if(container.Count % n !=0)
+            if(container.Count % n !=0) // eğer tam bölünmezse içerisinde eşit eleman olmaz bu yüzden badrequest döndürülür.
             {
                 return BadRequest();
             }
-            List<List<Container>> partitions = container.partition(container.Count / n);
+            List<List<Container>> partitions = container.partition(container.Count / n); // extension metot
             foreach (var item in partitions)
             {
                 result.Add(item);
@@ -55,7 +57,7 @@ namespace PayCore_HW3.Controllers
 
         }
         [HttpPost]
-        public void Post([FromBody] Container container)
+        public void Post([FromBody] Container container) // veritabanına container nesnesini ekler
         {
             try
             {
@@ -74,7 +76,8 @@ namespace PayCore_HW3.Controllers
             }
         }
         [HttpPut]
-        public ActionResult<Container> Put([FromBody] UpdateContainerModel request)
+        public ActionResult<Container> Put([FromBody] UpdateContainerModel request) // updatecontainermodeline göre veritabanında nesneyi günceller.
+
         {
             Container container = session.Entities.FirstOrDefault(x => x.Id == request.Id);
 
@@ -84,11 +87,12 @@ namespace PayCore_HW3.Controllers
             }
             try
             {
+                // Vehicleid güncellenmez
                 session.BeginTranstaction();
                 container.ContainerName = request.ContainerName;
                 container.Latitude = request.Latitude;
                 container.Longitude = request.Longitude;
-
+                session.Update(container);
                 session.Commit();
             }
             catch (Exception ex)
@@ -103,7 +107,7 @@ namespace PayCore_HW3.Controllers
             return Ok();
         }
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id) // Container nesnesi veritabanından silinir
         {
             Container container = session.Entities.Where(x => x.Id == id).SingleOrDefault();
             

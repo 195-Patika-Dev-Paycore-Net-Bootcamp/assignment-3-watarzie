@@ -15,19 +15,19 @@ namespace PayCore_HW3.Mapping
         {
             Id(x => x.Id, x =>
             {
-                x.Type(NHibernateUtil.Int64);
+                x.Type(NHibernateUtil.Int64); // long tipinde maplenir
                 x.UnsavedValue(0);
-                x.Generator(Generators.Increment);
+                x.Generator(Generators.Increment); // id auto increment olucak şekilde maplenir.
             });
             Property(b => b.ContainerName, x =>
             {
-                x.Length(50);
-                x.Type(NHibernateUtil.String);
+                x.Length(50); 
+                x.Type(NHibernateUtil.String); 
 
             });
             Property(b => b.VehicleId, x =>
             {
-                x.Type(NHibernateUtil.Int64);
+                x.Type(NHibernateUtil.Int64); 
 
             });
             Property(b => b.Latitude, x =>

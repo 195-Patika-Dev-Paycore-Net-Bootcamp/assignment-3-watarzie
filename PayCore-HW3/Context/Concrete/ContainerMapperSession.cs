@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 
 namespace PayCore_HW3.Context.Concrete
 {
-    public class ContainerMapperSession :IMapperSession<Container>
+    public class ContainerMapperSession :IMapperSession<Container> // interface implement edilmiştir
     {
-        private readonly ISession session;
-        private ITransaction transaction;
+        private readonly ISession session; // Nhibernate kütüphanesinden gelir
+        private ITransaction transaction; // Nhibernate kütüphanesinden gelir
         public ContainerMapperSession(ISession session)
         {
-            this.session = session;
+            this.session = session; //kurucu fonksiyonda kapsülleme yapılmıştır
         }
         public IQueryable<Container> Entities => session.Query<Container>();
 
-        public void BeginTranstaction()
+        public void BeginTranstaction() 
         {
             transaction = session.BeginTransaction();
         }
 
-        public void CloseTransaction()
+        public void CloseTransaction() 
         {
             if (transaction != null)
             {
@@ -32,34 +32,29 @@ namespace PayCore_HW3.Context.Concrete
             }
         }
 
-        public void Commit()
+        public void Commit() 
         {
             transaction.Commit();
         }
 
-        public void Delete(Container entity)
+        public void Delete(Container entity) 
         {
             session.Delete(entity);
         }
 
-        public void Rollback()
+        public void Rollback() 
         {
             transaction.Rollback();
         }
 
-        public void Save(Container entity)
+        public void Save(Container entity) 
         {
             session.Save(entity);
         }
-
-        public void Update(Container entity)
+        public void Update(Container entity) 
         {
             session.Update(entity);
         }
 
-        public void VehicleIdDelete(List<Container> container)
-        {
-            session.Delete(container);
-        }
     }
 }

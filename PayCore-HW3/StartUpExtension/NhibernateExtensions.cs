@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace PayCore_HW3.StartUpExtension
 {
+    // Nhibernate
     public static  class NhibernateExtensions
     {
         public static IServiceCollection AddNHibernatePosgreSql(this IServiceCollection services, string connectionString)

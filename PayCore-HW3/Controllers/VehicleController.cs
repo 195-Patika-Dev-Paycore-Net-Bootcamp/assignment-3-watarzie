@@ -24,13 +24,13 @@ namespace PayCore_HW3.Controllers
             this.csession = csession;
         }
         [HttpGet]
-        public List<Vehicle> Get()
+        public List<Vehicle> Get() // veritabanında kayıtlı araba listesini döndürür
         {
             List<Vehicle> result = session.Entities.ToList();
             return result;
         }
         [HttpPost]
-        public void Post([FromBody] Vehicle vehicle)
+        public void Post([FromBody] Vehicle vehicle) // veritabanına araba ekler
         {
             try
             {
@@ -48,8 +48,8 @@ namespace PayCore_HW3.Controllers
                 session.CloseTransaction();
             }
         }
-        [HttpPut]
-        public ActionResult<Vehicle> Put([FromBody] Vehicle request)
+        [HttpPut] 
+        public ActionResult<Vehicle> Put([FromBody] Vehicle request) // veritabanındaki araba nesnesini günceller
         {
             Vehicle vehicle = session.Entities.FirstOrDefault(x => x.Id == request.Id);
             
@@ -63,7 +63,7 @@ namespace PayCore_HW3.Controllers
 
                 vehicle.VehicleName = request.VehicleName;
                 vehicle.VehiclePlate = request.VehiclePlate;
-
+                session.Update(vehicle);
                 session.Commit();
             }
             catch (Exception ex)
@@ -78,7 +78,7 @@ namespace PayCore_HW3.Controllers
             return Ok();
         }
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id) // veritabanından arabayı siler
         {
             Vehicle vehicle = session.Entities.Where(x => x.Id == id).SingleOrDefault();
             List<Container> container = csession.Entities.Where(x => x.VehicleId == id).ToList();
@@ -94,8 +94,8 @@ namespace PayCore_HW3.Controllers
                 session.Delete(vehicle);
                 session.Commit();
 
-                csession.BeginTranstaction();
-                foreach (var item in container)
+                csession.BeginTranstaction(); // container için baglantı baslatır
+                foreach (var item in container) // eğer araba silinirse arabanın baglı oldugu container listeside silinir
                 {
                     csession.Delete(item);
                 }
