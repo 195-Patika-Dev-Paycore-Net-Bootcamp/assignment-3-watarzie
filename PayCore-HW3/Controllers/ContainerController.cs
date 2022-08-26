@@ -41,19 +41,12 @@ namespace PayCore_HW3.Controllers
         [HttpGet("{vehicleid},{n}")] // vehicleid listesini n girdisi kadar parçalayıp kümeleyip response eden action metot
         public IActionResult GetByNContainer(int vehicleid,int n)
         {
-            List<List<Container>> result = new List<List<Container>>(); // kümelenmiş halinin dönmesi için oluşturulan liste
+            
             List<Container> container = session.Entities.Where(x => x.VehicleId == vehicleid).ToList();
-            if(container.Count % n !=0) // eğer tam bölünmezse içerisinde eşit eleman olmaz bu yüzden badrequest döndürülür.
-            {
-                return BadRequest();
-            }
-            List<List<Container>> partitions = container.partition(container.Count / n); // extension metot
-            foreach (var item in partitions)
-            {
-                result.Add(item);
-                
-            }
-            return Ok(result);
+            
+            IEnumerable<IEnumerable<Container>> partitions = container.Split(n); // extension metot
+           
+            return Ok(partitions);
 
         }
         [HttpPost]
