@@ -27,9 +27,9 @@ namespace PayCore_HW3.Controllers
             return result;
         }
         [HttpGet("{vehicleid}")]
-        public IActionResult GetByVehicleId(int id)
+        public IActionResult GetByVehicleId(int vehicleid)
         {
-            List<Container> container = session.Entities.Where(x => x.VehicleId == id).ToList();
+            List<Container> container = session.Entities.Where(x => x.VehicleId == vehicleid).ToList();
             if(container.Count==0 || container == null)
             {
                 return NotFound();
@@ -37,10 +37,10 @@ namespace PayCore_HW3.Controllers
             return Ok(container);
         }
         [HttpGet("{vehicleid},{n}")]
-        public IActionResult GetByNContainer(int id,int n)
+        public IActionResult GetByNContainer(int vehicleid,int n)
         {
             List<List<Container>> result = new List<List<Container>>();
-            List<Container> container = session.Entities.Where(x => x.VehicleId == id).ToList();
+            List<Container> container = session.Entities.Where(x => x.VehicleId == vehicleid).ToList();
             if(container.Count % n !=0)
             {
                 return BadRequest();
