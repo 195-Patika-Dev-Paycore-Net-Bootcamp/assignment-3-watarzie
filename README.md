@@ -43,7 +43,6 @@ git clone https://github.com/195-Patika-Dev-Paycore-Net-Bootcamp/assignment-3-wa
 * [FluentNHibernate](https://www.nuget.org/packages/FluentNHibernate/): version 3.1.0
 * [Nhibernate](https://www.nuget.org/packages/NHibernate): version 5.3.12
 * [Npgsql](https://www.npgsql.org/): version 5.0.14
-* [Npgsql](https://www.npgsql.org/): version 5.0.14
 ## Swagger Ekran Görüntüsü
 ***
 
