@@ -1,7 +1,7 @@
 # Ömer Faruk Akkaya 3.Hafta Ödevi
 ***
-![Vehicle](PayCore-HW3/ScreenShots/VehicleTable.png)
-![Container](PayCore-HW3/ScreenShots/ContainerTable.png)
+![Vehicle](https://github.com/195-Patika-Dev-Paycore-Net-Bootcamp/assignment-3-watarzie/blob/main/PayCore-HW3/ScreenShots/VehicleTable.png?raw=true)
+![Container](https://github.com/195-Patika-Dev-Paycore-Net-Bootcamp/assignment-3-watarzie/blob/main/PayCore-HW3/ScreenShots/ContainerTable.png?raw=true)
 ***
 ## Ödev Gereksinimleri
 * Sistemde 2 Adet SQL tablosu kullanılmıştır.
@@ -45,6 +45,7 @@ git clone https://github.com/195-Patika-Dev-Paycore-Net-Bootcamp/assignment-3-wa
 * [Npgsql](https://www.npgsql.org/): version 5.0.14
 ## Swagger Ekran Görüntüsü
 ***
+![Swagger](https://github.com/195-Patika-Dev-Paycore-Net-Bootcamp/assignment-3-watarzie/blob/main/PayCore-HW3/ScreenShots/Swagger.png?raw=true)
 
 
 
