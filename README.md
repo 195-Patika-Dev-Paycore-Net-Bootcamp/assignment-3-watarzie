@@ -35,7 +35,7 @@ git clone https://github.com/195-Patika-Dev-Paycore-Net-Bootcamp/assignment-3-wa
 * appsetttings dosyası içerisinden veritabanı bağlantısı için <b>connectionstringi<b> kendi veritabanınıza göre uyarlayınız
 ```
 "ConnectionStrings": {
-    "PostgreSqlConnection": "User ID=your user id;Password=Your password;Server=Your server name;Port=yourport;Database=Database name;Integrated Security=true;Pooling=true;"
+    "PostgreSqlConnection": "User ID=youruserid;Password=Yourpassword;Server=Yourservername;Port=yourport;Database=Databasename;Integrated Security=true;Pooling=true;"
 ```
 ## Teknolojiler
 ***
